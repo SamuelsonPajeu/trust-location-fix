@@ -498,7 +498,6 @@ public class LocationAssistant
                                                         if (location != null) onLocationChanged(location); 
                                                     }
                                                 );
-            onLocationChanged(location);
         } catch (SecurityException e) {
             if (!quiet)
                 Log.e(getClass().getSimpleName(), "Error while requesting last location:\n " +
