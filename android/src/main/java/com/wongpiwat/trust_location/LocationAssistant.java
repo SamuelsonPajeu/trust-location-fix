@@ -491,7 +491,13 @@ public class LocationAssistant
         if (!googleApiClient.isConnected() || !permissionGranted || !locationRequested || !locationStatusOk)
             return;
         try {
-            Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            Location location = LocationServices.getFusedLocationProviderClient(context)
+                                                .getLastLocation()
+                                                .addOnSuccessListener(
+                                                    location -> {   
+                                                        if (location != null) onLocationChanged(location); 
+                                                    }
+                                                );
             onLocationChanged(location);
         } catch (SecurityException e) {
             if (!quiet)
